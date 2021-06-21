@@ -1,12 +1,11 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {
   Counter,
   Tab,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import constructorStyles from "./burger-constructor.module.css";
-
-import data from "../../utils/data.js";
 
 const ConstructorTab = () => {
   const [current, setCurrent] = React.useState("one");
@@ -25,68 +24,77 @@ const ConstructorTab = () => {
   );
 };
 
-const Card = (cardData) => {
+const CardsBox = ({ allIngredient, title }) => {
   return (
-    <div
-      className={`${constructorStyles.card} pr-2 pb-6 pl-2 mb-8`}
-      key={cardData.id}
-    >
+    <>
+      <h2 className="text text_type_main-medium">{title}</h2>
+      <div className={`${constructorStyles.cardsBox} pt-6 pr-4 pb-2 pl-4`}>
+        {allIngredient.map((ingredient) => {
+          return <Card {...ingredient} key={ingredient._id} />;
+        })}
+      </div>
+    </>
+  );
+};
+
+const Card = (ingredient) => {
+  return (
+    <div className={`${constructorStyles.card} pr-2 pb-6 pl-2 mb-8`}>
       <img
         className={`${constructorStyles.img}`}
-        src={cardData.image_large}
+        src={ingredient.image_large}
         alt="bun"
       />
       <div className={`${constructorStyles.price} mt-1`}>
         <div className="text text_type_digits-default mr-2">
-          {cardData.price}
+          {ingredient.price}
         </div>
         <CurrencyIcon type="primary" />
       </div>
       <h4
         className={`${constructorStyles.name} text text_type_main-default mt-1`}
       >
-        {cardData.name}
+        {ingredient.name}
       </h4>
       <Counter count={1} size="default" />
     </div>
   );
 };
 
-const BurgerConstructor = () => {
+const BurgerConstructor = ({ data }) => {
+  const bunData = data.filter((ingredient) => ingredient.type === "bun");
+  const sauceData = data.filter((ingredient) => ingredient.type === "sauce");
+  const mainData = data.filter((ingredient) => ingredient.type === "main");
   return (
     <div className={constructorStyles.mainBox}>
       <h2 className="text text_type_main-large mt-10">Соберите бургер</h2>
       <ConstructorTab />
       <div className={`${constructorStyles.scrollBox} scrollBox mt-10`}>
-        <h2 className="text text_type_main-medium">Булки</h2>
-        <div className={`${constructorStyles.cardsBox} pt-6 pr-4 pb-2 pl-4`}>
-          {data.map((cardData) => {
-            if (cardData.type === "bun") {
-              return <Card {...cardData} />;
-            } else return null;
-          })}
-        </div>
-        <h2 className="text text_type_main-medium mt-10">Соусы</h2>
-        <div className={`${constructorStyles.cardsBox} pt-6 pr-4 pb-2 pl-4`}>
-          {data.map((cardData) => {
-            if (cardData.type === "sauce") {
-              return <Card {...cardData} />;
-            } else return null;
-          })}
-        </div>
-        <h2 className="text text_type_main-medium mt-10">Начинки</h2>
-        <div className={`${constructorStyles.cardsBox} pt-6 pr-4 pb-2 pl-4`}>
-          {data.map((cardData) => {
-            if (cardData.type === "main") {
-              return <Card {...cardData} />;
-            } else return null;
-          })}
-        </div>
+        <CardsBox allIngredient={bunData} title="Булки" />
+        <CardsBox allIngredient={sauceData} title="Соусы" />
+        <CardsBox allIngredient={mainData} title="Начинки" />
       </div>
     </div>
   );
 };
 
-export default BurgerConstructor;
+BurgerConstructor.propTypes = {
+  arrayWithShape: PropTypes.arrayOf(
+    PropTypes.shape({
+      calories: PropTypes.number.isRequired,
+      carbohydrates: PropTypes.number.isRequired,
+      fat: PropTypes.number.isRequired,
+      image: PropTypes.string.isRequired,
+      image_large: PropTypes.string.isRequired,
+      image_mobile: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+      proteins: PropTypes.number.isRequired,
+      type: PropTypes.string.isRequired,
+      v: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
+    }).isRequired
+  ),
+};
 
-console.log(data);
+export default BurgerConstructor;
