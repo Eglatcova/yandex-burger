@@ -1,51 +1,30 @@
 .mainBox {
-  max-width: 600px;
-  width: 100%;
   max-height: 100%;
 }
 
-.constructorTabs {
+.elements {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-row-gap: 16px;
 }
 
-.list {
+.element {
   display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
-
-.item {
-  flex: 1;
-  text-align: center;
+.element div:nth-child(2) {
+  width: 100%;
 }
-
 .scrollBox {
-  min-height: 200px;
-  max-height: 70%;
-}
-
-.cardsBox {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-.card {
-  position: relative;
-  max-width: 272px;
+  min-height: 160px;
+  max-height: 65%;
+  flex-direction: column;
   width: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
-.img {
-  max-width: 240px;
-}
-
-.price {
+.total {
   display: flex;
-}
-
-.name {
-  text-align: center;
+  align-items: center;
+  justify-content: flex-end;
 }
