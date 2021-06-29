@@ -4,18 +4,23 @@ import {
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import card from "./card.module.css";
-// import PropTypes from "prop-types";
+import { ingredientTypes } from "../../../../prop-types";
+import PropTypes from "prop-types";
 
-export default function Card({ ingredient, selectedIngredient }) {
+export default function Card({ ingredient, handleSelectIngredient }) {
   return (
     <>
       <div
         className={`${card.card} pr-2 pb-6 pl-2 mb-8`}
         onClick={() => {
-          selectedIngredient(ingredient);
+          handleSelectIngredient(ingredient);
         }}
       >
-        <img className={`${card.img}`} src={ingredient.image_large} alt="bun" />
+        <img
+          className={`${card.img}`}
+          src={ingredient.image_large}
+          alt="ingredient"
+        />
         <div className={`${card.price} mt-1`}>
           <div className="text text_type_digits-default mr-2">
             {ingredient.price}
@@ -31,4 +36,7 @@ export default function Card({ ingredient, selectedIngredient }) {
   );
 }
 
-// Card.propTypes = {};
+Card.propTypes = {
+  ingredient: ingredientTypes,
+  handleSelectIngredient: PropTypes.func.isRequired,
+};

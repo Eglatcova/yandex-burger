@@ -1,10 +1,10 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import IngredientsTab from "./ingredients-tab/ingredients-tab";
 import CardsBox from "./cards-box/cards-box";
 import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import ingredientsStyles from "./burger-ingredients.module.css";
-import { mainTypes } from "../../prop-types";
+import { ingredientsTypes } from "../../prop-types";
 
 export default function BurgerIngredients({ data }) {
   const [state, setState] = useState({
@@ -25,24 +25,24 @@ export default function BurgerIngredients({ data }) {
     [data]
   );
 
-  const handleScrollToBox = (current) => {
+  const handleScrollToBox = useCallback((current) => {
     const element = document.getElementById(current);
     element.scrollIntoView({ behavior: "smooth" });
-  };
+  }, []);
 
-  const handleSelectedIngredient = (ingredientData) => {
+  const handleSelectIngredient = (ingredientData) => {
     setState({
       isOpen: true,
       ingredient: ingredientData,
     });
   };
 
-  const handleCloseModal = () => {
+  const handleCloseModal = useCallback(() => {
     setState({
       ...state,
       isOpen: false,
     });
-  };
+  }, [state]);
 
   const { isOpen, ingredient } = state;
 
@@ -56,27 +56,31 @@ export default function BurgerIngredients({ data }) {
             allIngredient={bunData}
             title="Булки"
             id="buns"
-            selectedIngredient={handleSelectedIngredient}
+            handleSelectIngredient={handleSelectIngredient}
           />
           <CardsBox
             allIngredient={sauceData}
             title="Соусы"
             id="sauces"
-            selectedIngredient={handleSelectedIngredient}
+            handleSelectIngredient={handleSelectIngredient}
           />
           <CardsBox
             allIngredient={mainData}
             title="Начинки"
             id="mains"
-            selectedIngredient={handleSelectedIngredient}
+            handleSelectIngredient={handleSelectIngredient}
           />
         </div>
       </div>
-      <Modal isOpen={isOpen} closeModal={handleCloseModal}>
+      <Modal
+        isOpen={isOpen}
+        handleCloseModal={handleCloseModal}
+        title="Детали ингредиента"
+      >
         <IngredientDetails checkedIngredient={ingredient} />
       </Modal>
     </>
   );
 }
 
-BurgerIngredients.propTypes = mainTypes;
+BurgerIngredients.propTypes = ingredientsTypes;

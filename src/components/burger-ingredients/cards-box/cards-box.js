@@ -1,10 +1,10 @@
 import React from "react";
 import Card from "./card/card";
-import cardsBoxStyles from "./cards-box.module.css";
 import PropTypes from "prop-types";
-import { mainTypes } from "../../../prop-types";
+import { ingredientsTypes } from "../../../prop-types";
+import cardsBoxStyles from "./cards-box.module.css";
 
-function CardsBox({ allIngredient, title, id, selectedIngredient }) {
+function CardsBox({ allIngredient, title, id, handleSelectIngredient }) {
   return (
     <>
       <h2 className="text text_type_main-medium" id={id}>
@@ -16,7 +16,7 @@ function CardsBox({ allIngredient, title, id, selectedIngredient }) {
             <Card
               ingredient={ingredient}
               key={ingredient._id}
-              selectedIngredient={selectedIngredient}
+              handleSelectIngredient={handleSelectIngredient}
             />
           );
         })}
@@ -27,7 +27,8 @@ function CardsBox({ allIngredient, title, id, selectedIngredient }) {
 export default CardsBox;
 
 CardsBox.propTypes = {
-  allIngredient: mainTypes,
+  allIngredient: ingredientsTypes,
   title: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  handleSelectIngredient: PropTypes.func.isRequired,
 };

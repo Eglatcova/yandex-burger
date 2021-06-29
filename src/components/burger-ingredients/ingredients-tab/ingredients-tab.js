@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
+import PropTypes from "prop-types";
 import ingredientsTabStyles from "./ingredients-tab.module.css";
 
 export default function IngredientsTab({ scrollTo }) {
@@ -7,7 +8,7 @@ export default function IngredientsTab({ scrollTo }) {
 
   useEffect(() => {
     scrollTo(current);
-  }, [scrollTo, current]);
+  }, [current, scrollTo]);
 
   return (
     <div className={`${ingredientsTabStyles.ingredientsTabs} pt-5`}>
@@ -23,3 +24,7 @@ export default function IngredientsTab({ scrollTo }) {
     </div>
   );
 }
+
+IngredientsTab.propTypes = {
+  scrollTo: PropTypes.func.isRequired,
+};

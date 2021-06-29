@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
 import PropTypes from "prop-types";
 import {
   ConstructorElement,
@@ -6,9 +6,21 @@ import {
   Button,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import Modal from "../modal/modal";
+import OrderDetails from "../order-details/order-details";
 import constructorStyles from "./burger-constructor.module.css";
 
 export default function BurgerConstructor({ data }) {
+  const [isModalState, setStateModal] = useState(false);
+
+  const handleOpenModal = useCallback(() => {
+    setStateModal(true);
+  }, []);
+
+  const handleCloseModal = useCallback(() => {
+    setStateModal(false);
+  }, []);
+
   return (
     <div className={`${constructorStyles.mainBox} mt-25`}>
       <div className={`${constructorStyles.element} pr-7`}>
@@ -21,7 +33,6 @@ export default function BurgerConstructor({ data }) {
           key={777}
         />
       </div>
-
       <div className={`${constructorStyles.scrollBox} scrollBox mt-4 mb-4`}>
         <div className={`${constructorStyles.elements} mr-4`}>
           {data.map((cardData) => {
@@ -43,7 +54,6 @@ export default function BurgerConstructor({ data }) {
           })}
         </div>
       </div>
-
       <div className={`${constructorStyles.element} pr-7`}>
         <ConstructorElement
           type="bottom"
@@ -59,10 +69,13 @@ export default function BurgerConstructor({ data }) {
           <span className="text text_type_digits-medium mr-2">610</span>
           <CurrencyIcon type="primary" />
         </div>
-        <Button type="primary" size="large">
+        <Button type="primary" size="large" onClick={handleOpenModal}>
           Оформить заказ
         </Button>
       </div>
+      <Modal isOpen={isModalState} handleCloseModal={handleCloseModal}>
+        <OrderDetails />
+      </Modal>
     </div>
   );
 }
