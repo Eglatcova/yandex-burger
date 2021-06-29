@@ -4,7 +4,7 @@ import cardsBoxStyles from "./cards-box.module.css";
 import PropTypes from "prop-types";
 import { mainTypes } from "../../../prop-types";
 
-function CardsBox({ allIngredient, title, id }) {
+function CardsBox({ allIngredient, title, id, selectedIngredient }) {
   return (
     <>
       <h2 className="text text_type_main-medium" id={id}>
@@ -12,7 +12,13 @@ function CardsBox({ allIngredient, title, id }) {
       </h2>
       <div className={`${cardsBoxStyles.cardsBox} pt-6 pr-4 pb-2 pl-4`}>
         {allIngredient.map((ingredient) => {
-          return <Card {...ingredient} key={ingredient._id} />;
+          return (
+            <Card
+              ingredient={ingredient}
+              key={ingredient._id}
+              selectedIngredient={selectedIngredient}
+            />
+          );
         })}
       </div>
     </>
