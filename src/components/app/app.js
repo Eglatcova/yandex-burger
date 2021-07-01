@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import "./App.css";
-import AppHeader from "./components/app-header/app-header";
-import BurgerConstructor from "./components/burger-constructor/burger-constructor";
-import BurgerIngredients from "./components/burger-ingredients/burger-ingredients";
+import AppHeader from "../app-header/app-header";
+import BurgerConstructor from "../burger-constructor/burger-constructor";
+import BurgerIngredients from "../burger-ingredients/burger-ingredients";
+import appStyles from "./app.module.css";
 
 const url = "https://norma.nomoreparties.space/api/ingredients";
 
@@ -15,8 +15,15 @@ function App() {
   useEffect(() => {
     const fetchProduct = () => {
       fetch(url)
-        .then((res) => res.json())
-        .then((data) => setState({ ...data }))
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+          return Promise.reject(`Ошибка ${res.status}`);
+        })
+        .then((data) => {
+          setState({ ...data });
+        })
         .catch((e) => {
           setState({ success: false, data: [] });
         });
@@ -25,11 +32,11 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
+    <div className={appStyles.app}>
       {state.success ? (
         <>
           <AppHeader />
-          <div className="container">
+          <div className={appStyles.container}>
             <BurgerIngredients data={state.data} />
             <BurgerConstructor data={state.data} />
           </div>

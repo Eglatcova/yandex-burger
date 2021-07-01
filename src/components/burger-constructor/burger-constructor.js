@@ -21,6 +21,8 @@ export default function BurgerConstructor({ data }) {
     setStateModal(false);
   }, []);
 
+  data = data.filter((ingredient) => ingredient.type !== "bun");
+
   return (
     <div className={`${constructorStyles.mainBox} mt-25`}>
       <div className={`${constructorStyles.element} pr-7`}>
@@ -29,8 +31,7 @@ export default function BurgerConstructor({ data }) {
           isLocked={true}
           text="Краторная булка N-200i (верх)"
           price={200}
-          thumbnail="https://code.s3.yandex.net/react/code/sauce-02-mobile.png"
-          key={777}
+          thumbnail="https://code.s3.yandex.net/react/code/bun-02-mobile.png"
         />
       </div>
       <div className={`${constructorStyles.scrollBox} scrollBox mt-4 mb-4`}>
@@ -60,8 +61,7 @@ export default function BurgerConstructor({ data }) {
           isLocked={true}
           text="Краторная булка N-200i (низ)"
           price={200}
-          thumbnail="https://code.s3.yandex.net/react/code/sauce-02-mobile.png"
-          key={778}
+          thumbnail="https://code.s3.yandex.net/react/code/bun-02-mobile.png"
         />
       </div>
       <div className={`${constructorStyles.total} mt-10 pr-4`}>
