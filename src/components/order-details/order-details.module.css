@@ -1,0 +1,8 @@
+.modalBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.identifier {
+  text-shadow: 0px 0px 50px rgba(76, 76, 255, 1);
+}
