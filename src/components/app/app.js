@@ -1,49 +1,23 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import AppHeader from "../app-header/app-header";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import appStyles from "./app.module.css";
 
-const url = "https://norma.nomoreparties.space/api/ingredients";
-
 function App() {
-  const [state, setState] = React.useState({
-    success: true,
-    data: [],
-  });
-
-  useEffect(() => {
-    const fetchProduct = () => {
-      fetch(url)
-        .then((res) => {
-          if (res.ok) {
-            return res.json();
-          }
-          return Promise.reject(`Ошибка ${res.status}`);
-        })
-        .then((data) => {
-          setState({ ...data });
-        })
-        .catch((e) => {
-          setState({ success: false, data: [] });
-        });
-    };
-    fetchProduct();
-  }, []);
-
   return (
     <div className={appStyles.app}>
-      {state.success ? (
-        <>
-          <AppHeader />
-          <div className={appStyles.container}>
-            <BurgerIngredients data={state.data} />
-            <BurgerConstructor data={state.data} />
-          </div>
-        </>
-      ) : (
-        alert("Произошла ошибка. Перезагрузите страницу")
-      )}
+      <>
+        <AppHeader />
+        <div className={appStyles.container}>
+          <DndProvider backend={HTML5Backend}>
+            <BurgerIngredients />
+            <BurgerConstructor />
+          </DndProvider>
+        </div>
+      </>
     </div>
   );
 }

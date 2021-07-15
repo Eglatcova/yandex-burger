@@ -1,14 +1,16 @@
 import React from "react";
 import orderDetailsStyles from "./order-details.module.css";
 import iconBg from "../../images/graphics.png";
+import { useSelector } from "react-redux";
 
 export default function OrderDetails() {
+  const orderNumber = useSelector((store) => store.order.orderNumber);
   return (
     <div className={`${orderDetailsStyles.modalBody}`}>
       <p
         className={`${orderDetailsStyles.identifier} text text_type_digits-large mt-15`}
       >
-        034536
+        {orderNumber}
       </p>
       <p
         className={`${orderDetailsStyles.identifierTitle} text text_type_main-medium mt-8`}

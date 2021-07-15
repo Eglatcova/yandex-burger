@@ -1,24 +1,33 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
 import ingredientsTabStyles from "./ingredients-tab.module.css";
 
-export default function IngredientsTab({ scrollTo }) {
-  const [current, setCurrent] = React.useState("buns");
-
-  useEffect(() => {
-    scrollTo(current);
-  }, [current, scrollTo]);
-
+export default function IngredientsTab({ scrollTo, currentTabGlow }) {
+  const handleClick = (e) => {
+    scrollTo(e);
+  };
   return (
     <div className={`${ingredientsTabStyles.ingredientsTabs} pt-5`}>
-      <Tab value="buns" active={current === "buns"} onClick={setCurrent}>
+      <Tab
+        value="buns"
+        active={currentTabGlow === "buns"}
+        onClick={handleClick}
+      >
         Булки
       </Tab>
-      <Tab value="sauces" active={current === "sauces"} onClick={setCurrent}>
+      <Tab
+        value="sauces"
+        active={currentTabGlow === "sauces"}
+        onClick={handleClick}
+      >
         Соусы
       </Tab>
-      <Tab value="mains" active={current === "mains"} onClick={setCurrent}>
+      <Tab
+        value="mains"
+        active={currentTabGlow === "mains"}
+        onClick={handleClick}
+      >
         Начинки
       </Tab>
     </div>
@@ -27,4 +36,5 @@ export default function IngredientsTab({ scrollTo }) {
 
 IngredientsTab.propTypes = {
   scrollTo: PropTypes.func.isRequired,
+  currentTabGlow: PropTypes.string.isRequired,
 };
