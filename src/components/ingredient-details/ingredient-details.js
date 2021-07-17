@@ -1,8 +1,12 @@
 import React from "react";
-import { ingredientTypes } from "../../prop-types";
 import ingredientDetailsStyles from "./ingredient-details.module.css";
+import { useSelector } from "react-redux";
 
-export default function IngredientDetails({ checkedIngredient }) {
+export default function IngredientDetails() {
+  const checkedIngredient = useSelector(
+    (store) => store.ingredients.lookedIngredient
+  );
+
   const { image_large, name, calories, proteins, fat, carbohydrates } =
     checkedIngredient;
   const txtClasses = "text text_type_main-default text_color_inactive";
@@ -57,5 +61,3 @@ export default function IngredientDetails({ checkedIngredient }) {
     </div>
   );
 }
-
-IngredientDetails.propTypes = ingredientTypes;

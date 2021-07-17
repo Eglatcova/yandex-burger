@@ -5,6 +5,7 @@ import {
   getAllOrder,
   ADD_INGREDIENT,
   MOVING_INGREDIENT,
+  DELETE_CONSTRUCTOR_INGREDIENTS,
 } from "../../sevices/actions/index.js";
 import { useDrop } from "react-dnd";
 
@@ -50,6 +51,7 @@ export default function BurgerConstructor() {
 
   const handleOpenModal = useCallback(() => {
     dispatch(getAllOrder(data.map((elem) => elem._id)));
+    dispatch({ type: DELETE_CONSTRUCTOR_INGREDIENTS });
     setStateModal(true);
   }, [dispatch, data]);
 
@@ -107,8 +109,14 @@ export default function BurgerConstructor() {
           <span className="text text_type_digits-medium mr-2">{sumResult}</span>
           <CurrencyIcon type="primary" />
         </div>
-        <Button type="primary" size="large" onClick={handleOpenModal}>
-          Оформить заказ
+        <Button
+          type="primary"
+          size="large"
+          onClick={() => {
+            bunData && handleOpenModal();
+          }}
+        >
+          {bunData ? "Оформить заказ" : "Выберете булку"}
         </Button>
       </div>
       <Modal isOpen={isModalState} handleCloseModal={handleCloseModal}>

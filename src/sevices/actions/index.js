@@ -11,6 +11,9 @@ export const GET_ORDER_ERROR = "GET_ORDER_ERROR";
 //получение ингредиентов конструктора
 export const GET_CONSTRUCTOR_INGREDIENTS = "GET_CONSTRUCTOR_INGREDIENTS";
 
+//удаление всех ингредиентов конструктора
+export const DELETE_CONSTRUCTOR_INGREDIENTS = "DELETE_CONSTRUCTOR_INGREDIENTS";
+
 //получение ингредиента модального окна
 export const LOOKED_INGREDIENT = "LOOKED_INGREDIENT";
 

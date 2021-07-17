@@ -6,6 +6,7 @@ import {
   GET_ORDER_SUCCESS,
   GET_ORDER_ERROR,
   GET_CONSTRUCTOR_INGREDIENTS,
+  DELETE_CONSTRUCTOR_INGREDIENTS,
   LOOKED_INGREDIENT,
   ADD_GLOW_INGREDIENTS_TAB,
   ADD_INGREDIENT,
@@ -37,6 +38,8 @@ export const ingredientsReducer = (state = initialStateIngredients, action) => {
       return { ...state, allingredients: [] };
     case GET_CONSTRUCTOR_INGREDIENTS:
       return { ...state };
+    case DELETE_CONSTRUCTOR_INGREDIENTS:
+      return { ...state, constructorIngredients: [] };
     case LOOKED_INGREDIENT:
       return { ...state, lookedIngredient: action.lookedIngredient };
     case ADD_GLOW_INGREDIENTS_TAB: {
@@ -81,7 +84,7 @@ export const ingredientsReducer = (state = initialStateIngredients, action) => {
     }
 
     default: {
-      return { ...state };
+      return state;
     }
   }
 };
@@ -95,7 +98,7 @@ export const orderReducer = (state = initialStateOrder, action) => {
     case GET_ORDER_ERROR:
       return { ...state, orderNumber: "error" };
     default: {
-      return { ...state };
+      return state;
     }
   }
 };

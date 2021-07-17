@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback, useEffect } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import IngredientsTab from "./ingredients-tab/ingredients-tab";
 import CardsBox from "./cards-box/cards-box";
 import Modal from "../modal/modal";
@@ -6,7 +6,6 @@ import IngredientDetails from "../ingredient-details/ingredient-details";
 import ingredientsStyles from "./burger-ingredients.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  getAllIngredients,
   LOOKED_INGREDIENT,
   ADD_GLOW_INGREDIENTS_TAB,
 } from "../../sevices/actions/index.js";
@@ -25,10 +24,6 @@ export default function BurgerIngredients() {
   }));
 
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getAllIngredients());
-  }, [dispatch]);
 
   const bunData = useMemo(
     () => data.filter((ingredient) => ingredient.type === "bun"),

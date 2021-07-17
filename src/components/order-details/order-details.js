@@ -10,7 +10,7 @@ export default function OrderDetails() {
       <p
         className={`${orderDetailsStyles.identifier} text text_type_digits-large mt-15`}
       >
-        {orderNumber}
+        {orderNumber || "wait..."}
       </p>
       <p
         className={`${orderDetailsStyles.identifierTitle} text text_type_main-medium mt-8`}

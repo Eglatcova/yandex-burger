@@ -49,7 +49,7 @@ export default function IngredientConstructor({ cardData, id, moveCard }) {
     },
   });
 
-  const [, drag] = useDrag({
+  const [{ isDragging }, drag] = useDrag({
     type: "ingredientConstructor",
     item: { id },
     collect: (monitor) => ({
@@ -57,9 +57,16 @@ export default function IngredientConstructor({ cardData, id, moveCard }) {
     }),
   });
 
+  const opacity = isDragging ? 0 : 1;
+
   drag(drop(ref));
+
   return (
-    <div className={`${ingredientConstructorStyles.element} pl-2`} ref={ref}>
+    <div
+      className={`${ingredientConstructorStyles.element} pl-2`}
+      ref={ref}
+      style={{ opacity }}
+    >
       <div className="pr-2">
         <DragIcon type="primary" />
       </div>
