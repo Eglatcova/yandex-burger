@@ -2,14 +2,14 @@
   font-family: "JetBrains Mono";
   font-style: normal;
   font-weight: 400;
-  src: url("../../fonts/JetBrainsMono-Regular.woff") format("woff");
+  src: url("./fonts/JetBrainsMono-Regular.woff") format("woff");
 }
 
 @font-face {
   font-family: "JetBrains Mono";
   font-style: normal;
   font-weight: 700;
-  src: url("../../fonts/JetBrainsMono-Bold.woff") format("woff");
+  src: url("./fonts/JetBrainsMono-Bold.woff") format("woff");
 }
 
 * {
@@ -24,7 +24,8 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+p {
   margin: 0;
   padding: 0;
 }
@@ -38,13 +39,8 @@ img {
   display: block;
 }
 
-.container {
-  margin: 0 auto;
-  max-width: 1240px;
-  display: flex;
-  justify-content: space-between;
-  max-height: 100vh;
-  height: 60vh;
+a {
+  text-decoration: none;
 }
 
 :global(.scrollBox) {
@@ -63,6 +59,14 @@ img {
   background: #8585ad;
   border: 3px solid #2f2f37;
   border-radius: 6px;
+}
+
+:global(.input_size_default) {
+  width: 480px !important;
+}
+
+:global(.hrefBlue) {
+  color: #4c4cff;
 }
 
 @media (max-width: 1200px) {

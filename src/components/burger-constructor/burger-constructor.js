@@ -2,11 +2,11 @@ import React, { useState, useCallback, useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   GET_CONSTRUCTOR_INGREDIENTS,
-  getAllOrder,
   ADD_INGREDIENT,
   MOVING_INGREDIENT,
   DELETE_CONSTRUCTOR_INGREDIENTS,
-} from "../../sevices/actions/index.js";
+} from "../../sevices/actions/ingredients";
+import { getAllOrder } from "../../sevices/actions/order";
 import { useDrop } from "react-dnd";
 
 import {

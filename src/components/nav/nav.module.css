@@ -35,6 +35,7 @@
 .button {
   display: flex;
   align-items: center;
+  color: white;
 }
 
 @media (max-width: 1200px) {

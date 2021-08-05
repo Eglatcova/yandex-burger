@@ -2,9 +2,6 @@ import {
   GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESS,
   GET_INGREDIENTS_ERROR,
-  GET_ORDER_REQUEST,
-  GET_ORDER_SUCCESS,
-  GET_ORDER_ERROR,
   GET_CONSTRUCTOR_INGREDIENTS,
   DELETE_CONSTRUCTOR_INGREDIENTS,
   LOOKED_INGREDIENT,
@@ -12,17 +9,13 @@ import {
   ADD_INGREDIENT,
   DELETE_INGREDIENT,
   MOVING_INGREDIENT,
-} from "../actions";
+} from "../actions/ingredients";
 
 const initialStateIngredients = {
   allingredients: [],
   constructorIngredients: [],
   lookedIngredient: {},
   glowIngredientsTab: "buns",
-};
-
-const initialStateOrder = {
-  orderNumber: "",
 };
 
 export const ingredientsReducer = (state = initialStateIngredients, action) => {
@@ -83,20 +76,6 @@ export const ingredientsReducer = (state = initialStateIngredients, action) => {
       return { ...state, constructorIngredients: ingredients };
     }
 
-    default: {
-      return state;
-    }
-  }
-};
-
-export const orderReducer = (state = initialStateOrder, action) => {
-  switch (action.type) {
-    case GET_ORDER_REQUEST:
-      return { ...state };
-    case GET_ORDER_SUCCESS:
-      return { ...state, orderNumber: action.orderNumber };
-    case GET_ORDER_ERROR:
-      return { ...state, orderNumber: "error" };
     default: {
       return state;
     }

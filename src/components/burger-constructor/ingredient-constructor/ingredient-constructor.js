@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useDrag, useDrop } from "react-dnd";
-import { DELETE_INGREDIENT } from "../../../sevices/actions/index.js";
+import { DELETE_INGREDIENT } from "../../../sevices/actions/ingredients";
 import {
   ConstructorElement,
   DragIcon,

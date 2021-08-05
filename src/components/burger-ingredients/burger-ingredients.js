@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   LOOKED_INGREDIENT,
   ADD_GLOW_INGREDIENTS_TAB,
-} from "../../sevices/actions/index.js";
+} from "../../sevices/actions/ingredients";
 
 export default function BurgerIngredients() {
   const [state, setState] = useState({
