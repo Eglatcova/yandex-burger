@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import AppHeader from "./components/nav/nav";
-
+import { getCookie } from "./utils/getCookie";
 import { getAllIngredients } from "./sevices/actions/ingredients";
+import { postToken, getUserData } from "./sevices/actions/user";
 
+import AppHeader from "./components/nav/nav";
 import { ConstructorPage } from "./pages/home";
 import { LoginPage } from "./pages/login";
 import { RegisterPage } from "./pages/register";
@@ -16,11 +17,24 @@ import { Profile } from "./pages/profile";
 import appStyles from "./app.module.css";
 
 function App() {
+  const { auth, accessToken } = useSelector((store) => ({
+    auth: store.user.auth,
+    accessToken: store.user.accessToken,
+  }));
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getAllIngredients());
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(postToken(getCookie("token")));
+  }, [dispatch]);
+
+  useEffect(() => {
+    auth && dispatch(getUserData(accessToken));
+  }, [dispatch, auth, accessToken]);
 
   return (
     <div className={appStyles.app}>

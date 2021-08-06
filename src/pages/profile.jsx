@@ -1,9 +1,25 @@
 import React from "react";
-import { Route, Switch, NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Route, Switch, NavLink, useHistory } from "react-router-dom";
+
+import { postLogout } from "../sevices/actions/user";
+
+import { getCookie } from "../utils/getCookie";
+
 import ProfileForm from "../components/profile-form/profile-form";
 import styles from "./profile.module.css";
 
 export function Profile() {
+  const history = useHistory();
+
+  const dispatch = useDispatch();
+
+  const onClockLogout = () => {
+    dispatch(postLogout(getCookie("token"))).then(() => {
+      history.replace({ pathname: "/login" });
+    });
+  };
+
   return (
     <div className={`${styles.wrap}`}>
       <div className={`${styles.nav}`}>
@@ -23,14 +39,12 @@ export function Profile() {
         >
           История заказов
         </NavLink>
-        <NavLink
-          exact
-          to="/profile/exit"
+        <li
           className={`${styles.item} text text_type_main-medium`}
-          activeClassName={styles.activeItem}
+          onClick={onClockLogout}
         >
           Выход
-        </NavLink>
+        </li>
       </div>
       <div className={`${styles.content}`}>
         <Switch>

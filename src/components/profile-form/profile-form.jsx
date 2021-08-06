@@ -1,26 +1,46 @@
-import React, { useState } from "react";
-import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import {
+  Input,
+  Button,
+} from "@ya.praktikum/react-developer-burger-ui-components";
+
+import style from "./profile-form.module.css";
 
 export default function ProfileForm() {
+  const { auth, name, email } = useSelector((store) => ({
+    auth: store.user.auth,
+    name: store.user.name,
+    email: store.user.email,
+  }));
+
   const [data, setData] = useState({
-    name: "",
-    email: "",
-    password: "",
+    newName: "",
+    newEmail: "",
+    newPassword: "",
   });
 
+  useEffect(() => {
+    auth && setData({ newName: name, newEmail: email, newPassword: "" });
+  }, [auth, name, email]);
+
   const onChangeName = (e) => {
-    setData({ ...data, name: e.target.value });
+    setData({ ...data, newName: e.target.value });
   };
 
   const onChangeEmail = (e) => {
-    setData({ ...data, email: e.target.value });
+    setData({ ...data, newEmail: e.target.value });
   };
 
   const onChangePassword = (e) => {
-    setData({ ...data, password: e.target.value });
+    setData({ ...data, newPassword: e.target.value });
   };
 
-  const { email, password, name } = data;
+  const onClickSave = () => {};
+  const onClickCancel = () => {};
+
+  const { newName, newEmail, newPassword } = data;
+
   return (
     <div className={`ml-15`}>
       <div>
@@ -28,7 +48,7 @@ export default function ProfileForm() {
           type={"text"}
           placeholder={"Имя"}
           onChange={onChangeName}
-          value={name}
+          value={newName}
           name={"name"}
           icon={"EditIcon"}
         />
@@ -38,7 +58,7 @@ export default function ProfileForm() {
           type={"email"}
           placeholder={"Логин"}
           onChange={onChangeEmail}
-          value={email}
+          value={newEmail}
           name={"email"}
           icon={"EditIcon"}
         />
@@ -48,10 +68,20 @@ export default function ProfileForm() {
           type={"password"}
           placeholder={"Пароль"}
           onChange={onChangePassword}
-          value={password}
+          value={newPassword}
           name={"password"}
           icon={"EditIcon"}
         />
+      </div>
+      <div className={`${style.btnWrap} mt-6`}>
+        <Button type="primary" size="medium" onClick={onClickSave}>
+          Сохранить
+        </Button>
+        <div className={`ml-6`}>
+          <Button type="primary" size="medium" onClick={onClickCancel}>
+            Отмена
+          </Button>
+        </div>
       </div>
     </div>
   );
