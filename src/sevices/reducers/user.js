@@ -1,4 +1,3 @@
-import data from "../../utils/data";
 import {
   ADD_NAME,
   ADD_EMAIL,
@@ -18,6 +17,9 @@ import {
   GET_USER_DATA_REQUEST,
   GET_USER_DATA_SUCCESS,
   GET_USER_DATA_ERROR,
+  PATCH_USER_DATA_REQUEST,
+  PATCH_USER_DATA_SUCCESS,
+  PATCH_USER_DATA_ERROR,
 } from "../actions/user";
 
 const initialUser = {
@@ -86,6 +88,12 @@ export const userReducer = (state = initialUser, action) => {
     case GET_USER_DATA_SUCCESS:
       return { ...state, name: action.name, email: action.email };
     case GET_USER_DATA_ERROR:
+      return { ...state };
+    case PATCH_USER_DATA_REQUEST:
+      return { ...state };
+    case PATCH_USER_DATA_SUCCESS:
+      return { ...state, name: action.name, email: action.email };
+    case PATCH_USER_DATA_ERROR:
       return { ...state };
     default: {
       return state;

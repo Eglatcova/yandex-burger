@@ -14,6 +14,8 @@ import { ForgotPassword } from "./pages/forgot-password";
 import { ResetPassword } from "./pages/reset-password";
 import { Profile } from "./pages/profile";
 
+import { ProtectedRoute } from "./components/protected-route/protected-route";
+
 import appStyles from "./app.module.css";
 
 function App() {
@@ -56,9 +58,9 @@ function App() {
           <Route path="/reset-password" exact={true}>
             <ResetPassword />
           </Route>
-          <Route path="/profile" exact={true}>
+          <ProtectedRoute path="/profile">
             <Profile />
-          </Route>
+          </ProtectedRoute>
           <Route path="/profile/:section" exact={true}>
             <Profile />
           </Route>

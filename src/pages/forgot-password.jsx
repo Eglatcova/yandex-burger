@@ -1,12 +1,18 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { NavLink, Redirect } from "react-router-dom";
 import {
   Input,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import { setCookie } from "../utils/setCookie";
 import { FormWrap } from "../components/form-wrap/form-wrap";
 
 export function ForgotPassword() {
+  const { auth } = useSelector((store) => ({
+    auth: store.user.auth,
+  }));
+
   const [email, setEmail] = useState("");
 
   const onChangeEmail = (e) => {
@@ -26,18 +32,31 @@ export function ForgotPassword() {
     })
       .then((res) => {
         if (res.ok) {
+          setCookie("updPass", "Токен для восстановления пароля отправлен", {
+            path: "/",
+          });
           return res.json();
         } else {
           alert("error");
         }
       })
       .then((data) => {
-        alert(data.success);
+        alert("Код отправлен на почту");
       })
       .catch((e) => {
         alert("error");
       });
   };
+
+  if (auth) {
+    return (
+      <Redirect
+        to={{
+          pathname: "/",
+        }}
+      />
+    );
+  }
 
   return (
     <FormWrap>

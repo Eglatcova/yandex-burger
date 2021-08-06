@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { NavLink, useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { NavLink, useHistory, Redirect } from "react-router-dom";
 import {
   EmailInput,
   PasswordInput,
@@ -11,6 +11,13 @@ import { FormWrap } from "../components/form-wrap/form-wrap";
 
 export function LoginPage() {
   const history = useHistory();
+  const prevPath = history.location.state?.from;
+
+  const { auth } = useSelector((store) => ({
+    auth: store.user.auth,
+  }));
+
+  const dispatch = useDispatch();
 
   const [data, setData] = useState({
     email: "",
@@ -18,8 +25,6 @@ export function LoginPage() {
   });
 
   const { email, password } = data;
-
-  const dispatch = useDispatch();
 
   const onChangeEmail = (e) => {
     setData({ ...data, email: e.target.value });
@@ -30,10 +35,12 @@ export function LoginPage() {
   };
 
   const onClickLogin = (e) => {
-    dispatch(postAuth(email, password)).then(() => {
-      history.replace({ pathname: "/" });
-    });
+    dispatch(postAuth(email, password));
   };
+
+  if (auth) {
+    return <Redirect to={prevPath || "/"} />;
+  }
 
   return (
     <FormWrap>

@@ -7,6 +7,7 @@ import { postLogout } from "../sevices/actions/user";
 import { getCookie } from "../utils/getCookie";
 
 import ProfileForm from "../components/profile-form/profile-form";
+import { ProtectedRoute } from "../components/protected-route/protected-route";
 import styles from "./profile.module.css";
 
 export function Profile() {
@@ -48,12 +49,12 @@ export function Profile() {
       </div>
       <div className={`${styles.content}`}>
         <Switch>
-          <Route path="/profile" exact={true}>
+          <ProtectedRoute path="/profile" exact={true}>
             <ProfileForm />
-          </Route>
-          <Route path="/profile/orders" exact={true}>
+          </ProtectedRoute>
+          <ProtectedRoute path="/profile/orders" exact={true}>
             <div className="div">История заказов</div>
-          </Route>
+          </ProtectedRoute>
         </Switch>
       </div>
     </div>

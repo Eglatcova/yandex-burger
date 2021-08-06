@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { NavLink, Redirect } from "react-router-dom";
 import {
   Input,
   EmailInput,
@@ -11,6 +11,10 @@ import { postRegister } from "../sevices/actions/user.js";
 import { FormWrap } from "../components/form-wrap/form-wrap";
 
 export function RegisterPage() {
+  const { auth } = useSelector((store) => ({
+    auth: store.user.auth,
+  }));
+
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -36,6 +40,16 @@ export function RegisterPage() {
   const onClickRegister = (e) => {
     dispatch(postRegister(name, email, password));
   };
+
+  if (auth) {
+    return (
+      <Redirect
+        to={{
+          pathname: "/",
+        }}
+      />
+    );
+  }
 
   return (
     <FormWrap>

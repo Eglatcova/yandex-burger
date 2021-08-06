@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Input,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
+import { patchUserData } from "../../sevices/actions/user";
+
 import style from "./profile-form.module.css";
 
 export default function ProfileForm() {
-  const { auth, name, email } = useSelector((store) => ({
+  const { auth, name, email, accessToken } = useSelector((store) => ({
     auth: store.user.auth,
     name: store.user.name,
     email: store.user.email,
+    accessToken: store.user.accessToken,
   }));
+
+  const dispatch = useDispatch();
 
   const [data, setData] = useState({
     newName: "",
@@ -36,8 +41,13 @@ export default function ProfileForm() {
     setData({ ...data, newPassword: e.target.value });
   };
 
-  const onClickSave = () => {};
-  const onClickCancel = () => {};
+  const onClickSave = (accessToken, name, email) => {
+    dispatch(patchUserData(accessToken, name, email));
+  };
+
+  const onClickCancel = () => {
+    setData({ ...data, newName: name, newEmail: email });
+  };
 
   const { newName, newEmail, newPassword } = data;
 
@@ -74,7 +84,13 @@ export default function ProfileForm() {
         />
       </div>
       <div className={`${style.btnWrap} mt-6`}>
-        <Button type="primary" size="medium" onClick={onClickSave}>
+        <Button
+          type="primary"
+          size="medium"
+          onClick={() => {
+            onClickSave(accessToken, newName, newEmail);
+          }}
+        >
           Сохранить
         </Button>
         <div className={`ml-6`}>

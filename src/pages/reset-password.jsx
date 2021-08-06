@@ -1,12 +1,21 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { NavLink, Redirect } from "react-router-dom";
 import {
   Input,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import { getCookie } from "../utils/getCookie";
+import { deleteCookie } from "../utils/deleteCookie";
+
 import { FormWrap } from "../components/form-wrap/form-wrap";
 
 export function ResetPassword() {
+  const forgotCookie = getCookie("updPass");
+  const { auth } = useSelector((store) => ({
+    auth: store.user.auth,
+  }));
+
   const [data, setEmail] = useState({
     password: "",
     token: "",
@@ -41,11 +50,34 @@ export function ResetPassword() {
 
     if (response.ok) {
       let data = await response.json();
+      deleteCookie("updPass");
       alert(data.message);
     } else {
       alert("error");
     }
   };
+
+  console.log("forgotCookie", forgotCookie);
+
+  if (auth) {
+    return (
+      <Redirect
+        to={{
+          pathname: "/",
+        }}
+      />
+    );
+  }
+
+  if (!forgotCookie) {
+    return (
+      <Redirect
+        to={{
+          pathname: "/forgot-password",
+        }}
+      />
+    );
+  }
 
   return (
     <FormWrap>

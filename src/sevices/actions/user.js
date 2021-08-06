@@ -1,4 +1,3 @@
-import { getCookie } from "../../utils/getCookie";
 import { setCookie } from "../../utils/setCookie";
 import { deleteCookie } from "../../utils/deleteCookie";
 
@@ -36,10 +35,15 @@ export const POST_CODE_FOR_PASS_REQUEST = "POST_CODE_FOR_PASS_REQUEST";
 export const POST_CODE_FOR_PASS_SUCCESS = "POST_CODE_FOR_PASS_SUCCESS";
 export const POST_CODE_FOR_PASS_ERROR = "POST_CODE_FOR_PASS_ERROR";
 
-//получение кода для создания нового пароля
+//получение данных о пользователе
 export const GET_USER_DATA_REQUEST = "GET_USER_DATA_REQUEST";
 export const GET_USER_DATA_SUCCESS = "GET_USER_DATA_SUCCESS";
 export const GET_USER_DATA_ERROR = "GET_USER_DATA_ERROR";
+
+//перезапись данных пользователя
+export const PATCH_USER_DATA_REQUEST = "PATCH_USER_DATA_REQUEST";
+export const PATCH_USER_DATA_SUCCESS = "PATCH_USER_DATA_SUCCESS";
+export const PATCH_USER_DATA_ERROR = "PATCH_USER_DATA_ERROR";
 
 //запрос к апи, регистрация
 export const postRegister =
@@ -79,7 +83,7 @@ export const postRegister =
         email: data.user.email,
       });
       if (data.refreshToken) {
-        setCookie("token", data.refreshToken);
+        setCookie("token", data.refreshToken, { path: "/" });
       }
     } else {
       alert("Register error");
@@ -125,7 +129,7 @@ export const postAuth = (userEmail, userPassword) => async (dispatch) => {
       email: data.user.email,
     });
     if (data.refreshToken) {
-      setCookie("token", data.refreshToken);
+      setCookie("token", data.refreshToken, { path: "/" });
     }
   } else {
     alert("Login error");
@@ -161,16 +165,17 @@ export const postToken = (userToken) => async (dispatch) => {
 
   if (response.ok) {
     let data = await response.json();
+    console.log("ok", data);
     dispatch({
       type: POST_TOKEN_SUCCESS,
       success: data.success,
       accessToken: data.accessToken.split("Bearer ")[1],
     });
     if (data.refreshToken) {
-      setCookie("token", data.refreshToken);
+      setCookie("token", data.refreshToken, { path: "/" });
     }
   } else {
-    alert("Token error");
+    console.log("Не зарегистрирован");
     dispatch({
       type: POST_TOKEN_ERROR,
     });
@@ -234,7 +239,7 @@ export const getUserData = (accessToken) => async (dispatch) => {
       },
     }
   ).catch((e) => {
-    alert("User data error1");
+    alert("User get data error");
     dispatch({
       type: GET_USER_DATA_ERROR,
     });
@@ -248,9 +253,53 @@ export const getUserData = (accessToken) => async (dispatch) => {
       email: data.user.email,
     });
   } else {
-    alert("User data error2");
+    alert("User get data error");
     dispatch({
       type: GET_USER_DATA_ERROR,
     });
   }
 };
+
+//запрос к апи, перезапись данных
+export const patchUserData =
+  (accessToken, userName, userEmail) => async (dispatch) => {
+    dispatch({
+      type: PATCH_USER_DATA_REQUEST,
+    });
+    console.log("ent", accessToken, userEmail, userName);
+    let response = await fetch(
+      "https://norma.nomoreparties.space/api/auth/user",
+      {
+        method: "PATCH",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + accessToken,
+        },
+        body: JSON.stringify({
+          email: userEmail,
+          name: userName,
+        }),
+      }
+    ).catch((e) => {
+      alert("User patch data error");
+      dispatch({
+        type: PATCH_USER_DATA_ERROR,
+      });
+    });
+
+    if (response.ok) {
+      let data = await response.json();
+      alert("Ваши данные обновлены");
+      dispatch({
+        type: PATCH_USER_DATA_SUCCESS,
+        name: data.user.name,
+        email: data.user.email,
+      });
+    } else {
+      alert("User  patch data error");
+      dispatch({
+        type: PATCH_USER_DATA_ERROR,
+      });
+    }
+  };
