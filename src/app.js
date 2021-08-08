@@ -6,7 +6,7 @@ import { getCookie } from "./utils/getCookie";
 import { getAllIngredients } from "./sevices/actions/ingredients";
 import { postToken, getUserData } from "./sevices/actions/user";
 
-import AppHeader from "./components/nav/nav";
+import { AppHeader } from "./components/nav/nav";
 import { ConstructorPage } from "./pages/home";
 import { LoginPage } from "./pages/login";
 import { RegisterPage } from "./pages/register";
@@ -46,6 +46,9 @@ function App() {
           <Route path="/" exact={true}>
             <ConstructorPage />
           </Route>
+          <Route path="/ingredients/:id" exact={true}>
+            <ConstructorPage />
+          </Route>
           <Route path="/login" exact={true}>
             <LoginPage />
           </Route>
@@ -58,7 +61,7 @@ function App() {
           <Route path="/reset-password" exact={true}>
             <ResetPassword />
           </Route>
-          <ProtectedRoute path="/profile">
+          <ProtectedRoute path="/profile" exact={true}>
             <Profile />
           </ProtectedRoute>
           <Route path="/profile/:section" exact={true}>

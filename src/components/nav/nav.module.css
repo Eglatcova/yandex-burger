@@ -35,7 +35,19 @@
 .button {
   display: flex;
   align-items: center;
+  color: rgb(133, 133, 173);
+
+  svg {
+    fill: rgb(133, 133, 173);
+  }
+}
+
+.activeHref {
   color: white;
+
+  svg {
+    fill: white;
+  }
 }
 
 @media (max-width: 1200px) {

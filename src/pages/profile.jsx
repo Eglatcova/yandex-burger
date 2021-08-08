@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { Route, Switch, NavLink, useHistory } from "react-router-dom";
+import { Switch, NavLink, useHistory } from "react-router-dom";
 
 import { postLogout } from "../sevices/actions/user";
 

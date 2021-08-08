@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import {
   GET_CONSTRUCTOR_INGREDIENTS,
   ADD_INGREDIENT,
@@ -20,6 +21,7 @@ import OrderDetails from "../order-details/order-details";
 import constructorStyles from "./burger-constructor.module.css";
 
 export default function BurgerConstructor() {
+  const history = useHistory();
   const [isModalState, setStateModal] = useState(false);
   const dispatch = useDispatch();
 
@@ -37,7 +39,11 @@ export default function BurgerConstructor() {
     },
   });
 
-  const data = useSelector((store) => store.ingredients.constructorIngredients);
+  const { auth, data } = useSelector((store) => ({
+    auth: store.user.auth,
+    data: store.ingredients.constructorIngredients,
+  }));
+
   const scrollBoxData = data.filter((ingredient) => ingredient.type !== "bun");
   const bunData = data.find((ingredient) => ingredient.type === "bun");
 
@@ -48,6 +54,13 @@ export default function BurgerConstructor() {
   useEffect(() => {
     dispatch({ type: GET_CONSTRUCTOR_INGREDIENTS });
   }, [dispatch]);
+
+  const onClickMakeOrder = () => {
+    if (!auth) {
+      history.replace({ pathname: `/login` });
+    }
+    auth && bunData && handleOpenModal();
+  };
 
   const handleOpenModal = useCallback(() => {
     dispatch(getAllOrder(data.map((elem) => elem._id)));
@@ -66,6 +79,7 @@ export default function BurgerConstructor() {
       toIndex: hoverIndex,
     });
   };
+
   return (
     <div className={`${constructorStyles.mainBox} mt-25`} ref={dropTarget}>
       {bunData && (
@@ -109,13 +123,7 @@ export default function BurgerConstructor() {
           <span className="text text_type_digits-medium mr-2">{sumResult}</span>
           <CurrencyIcon type="primary" />
         </div>
-        <Button
-          type="primary"
-          size="large"
-          onClick={() => {
-            bunData && handleOpenModal();
-          }}
-        >
+        <Button type="primary" size="large" onClick={onClickMakeOrder}>
           {bunData ? "Оформить заказ" : "Выберете булку"}
         </Button>
       </div>

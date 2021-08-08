@@ -1,16 +1,20 @@
 import React, { useState, useMemo, useCallback } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import IngredientsTab from "./ingredients-tab/ingredients-tab";
 import CardsBox from "./cards-box/cards-box";
+
 import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import ingredientsStyles from "./burger-ingredients.module.css";
-import { useSelector, useDispatch } from "react-redux";
+
 import {
   LOOKED_INGREDIENT,
   ADD_GLOW_INGREDIENTS_TAB,
 } from "../../sevices/actions/ingredients";
 
 export default function BurgerIngredients() {
+  const history = useHistory();
   const [state, setState] = useState({
     isOpen: false,
   });
@@ -80,7 +84,8 @@ export default function BurgerIngredients() {
       isOpen: false,
     });
     dispatch({ type: LOOKED_INGREDIENT, lookedIngredient: {} });
-  }, [state, dispatch]);
+    history.replace({ pathname: `/` });
+  }, [state, dispatch, history]);
 
   const { isOpen } = state;
 
@@ -117,6 +122,7 @@ export default function BurgerIngredients() {
           />
         </div>
       </div>
+
       <Modal
         isOpen={isOpen}
         handleCloseModal={handleCloseModal}

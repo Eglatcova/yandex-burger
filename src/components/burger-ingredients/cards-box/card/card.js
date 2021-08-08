@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   Counter,
   CurrencyIcon,
@@ -20,7 +21,12 @@ export default function Card({ ingredient, handleSelectIngredient }) {
   });
 
   return (
-    <>
+    <Link
+      to={{
+        pathname: `/ingredients/${ingredient._id}`,
+        state: { background: true },
+      }}
+    >
       <div
         ref={dragRef}
         className={`${card.card} pr-2 pb-6 pl-2 mb-8`}
@@ -44,7 +50,7 @@ export default function Card({ ingredient, handleSelectIngredient }) {
         </h4>
         <Counter count={counter} size="default" />
       </div>
-    </>
+    </Link>
   );
 }
 

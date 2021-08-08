@@ -16,19 +16,21 @@ const initialStateIngredients = {
   constructorIngredients: [],
   lookedIngredient: {},
   glowIngredientsTab: "buns",
+  ingredientsLoaded: false,
 };
 
 export const ingredientsReducer = (state = initialStateIngredients, action) => {
   switch (action.type) {
     case GET_INGREDIENTS_REQUEST:
-      return { ...state };
+      return { ...state, ingredientsLoaded: false };
     case GET_INGREDIENTS_SUCCESS:
       return {
         ...state,
         allingredients: action.ingredients,
+        ingredientsLoaded: true,
       };
     case GET_INGREDIENTS_ERROR:
-      return { ...state, allingredients: [] };
+      return { ...state, allingredients: [], ingredientsLoaded: false };
     case GET_CONSTRUCTOR_INGREDIENTS:
       return { ...state };
     case DELETE_CONSTRUCTOR_INGREDIENTS:

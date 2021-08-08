@@ -57,8 +57,6 @@ export function ResetPassword() {
     }
   };
 
-  console.log("forgotCookie", forgotCookie);
-
   if (auth) {
     return (
       <Redirect

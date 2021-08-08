@@ -266,7 +266,6 @@ export const patchUserData =
     dispatch({
       type: PATCH_USER_DATA_REQUEST,
     });
-    console.log("ent", accessToken, userEmail, userName);
     let response = await fetch(
       "https://norma.nomoreparties.space/api/auth/user",
       {

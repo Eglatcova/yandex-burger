@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Route, Redirect, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import PropTypes from "prop-types";
 
 import { getCookie } from "../../utils/getCookie";
 import { postToken } from "../../sevices/actions/user";
 
-export function ProtectedRoute({ children, route, exact }) {
+export function ProtectedRoute({ children, path, exact }) {
   const history = useHistory();
   const prevPath = history.location.pathname;
 
@@ -35,8 +36,14 @@ export function ProtectedRoute({ children, route, exact }) {
     return <Redirect to={{ pathname: "/login", state: { from: prevPath } }} />;
   }
   return (
-    <Route {...route} {...exact}>
+    <Route {...path} {...exact}>
       {children}
     </Route>
   );
 }
+
+ProtectedRoute.propTypes = {
+  children: PropTypes.object.isRequired,
+  path: PropTypes.string.isRequired,
+  exact: PropTypes.bool.isRequired,
+};

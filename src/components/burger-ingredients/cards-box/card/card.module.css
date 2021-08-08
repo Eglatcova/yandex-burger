@@ -13,8 +13,10 @@
 
 .price {
   display: flex;
+  color: white;
 }
 
 .name {
   text-align: center;
+  color: white;
 }
