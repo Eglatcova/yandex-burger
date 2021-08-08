@@ -7,12 +7,15 @@ import { getAllIngredients } from "./sevices/actions/ingredients";
 import { postToken, getUserData } from "./sevices/actions/user";
 
 import { AppHeader } from "./components/nav/nav";
-import { ConstructorPage } from "./pages/home";
-import { LoginPage } from "./pages/login";
-import { RegisterPage } from "./pages/register";
-import { ForgotPassword } from "./pages/forgot-password";
-import { ResetPassword } from "./pages/reset-password";
-import { Profile } from "./pages/profile";
+
+import {
+  ConstructorPage,
+  LoginPage,
+  RegisterPage,
+  ForgotPassword,
+  ResetPassword,
+  Profile,
+} from "./pages";
 
 import { ProtectedRoute } from "./components/protected-route/protected-route";
 

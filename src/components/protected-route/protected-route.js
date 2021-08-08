@@ -35,6 +35,7 @@ export function ProtectedRoute({ children, path, exact }) {
   if (!auth) {
     return <Redirect to={{ pathname: "/login", state: { from: prevPath } }} />;
   }
+
   return (
     <Route {...path} {...exact}>
       {children}
