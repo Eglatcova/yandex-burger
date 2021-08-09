@@ -1,0 +1,19 @@
+.mainBox {
+  max-width: 600px;
+  width: 100%;
+  height: calc(100vh - 82px);
+}
+
+.list {
+  display: flex;
+}
+
+.item {
+  flex: 1;
+  text-align: center;
+}
+
+.scrollBox {
+  min-height: 200px;
+  max-height: calc(100% - 210px);
+}

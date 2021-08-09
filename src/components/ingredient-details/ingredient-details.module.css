@@ -1,0 +1,17 @@
+.modalBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 112px);
+  grid-column-gap: 20px;
+}
+
+.cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

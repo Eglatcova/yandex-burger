@@ -1,0 +1,8 @@
+.container {
+  margin: 0 auto;
+  max-width: 1240px;
+  display: flex;
+  justify-content: space-between;
+  max-height: 100vh;
+  height: 60vh;
+}

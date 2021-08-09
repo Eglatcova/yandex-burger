@@ -1,0 +1,77 @@
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400;
+  src: url("./fonts/JetBrainsMono-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 700;
+  src: url("./fonts/JetBrainsMono-Bold.woff") format("woff");
+}
+
+* {
+  box-sizing: border-box;
+}
+
+ol,
+ul,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+img {
+  display: block;
+}
+
+a {
+  text-decoration: none;
+}
+
+:global(.scrollBox) {
+  overflow-y: scroll;
+}
+
+:global(.scrollBox::-webkit-scrollbar-track) {
+  background: #2f2f37;
+}
+
+:global(.scrollBox::-webkit-scrollbar) {
+  width: 12px;
+}
+
+:global(.scrollBox::-webkit-scrollbar-thumb) {
+  background: #8585ad;
+  border: 3px solid #2f2f37;
+  border-radius: 6px;
+}
+
+:global(.input_size_default) {
+  width: 480px !important;
+}
+
+:global(.hrefBlue) {
+  color: #4c4cff;
+}
+
+@media (max-width: 1200px) {
+  .container {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
