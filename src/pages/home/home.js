@@ -4,10 +4,10 @@ import { useHistory, useRouteMatch } from "react-router-dom";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
-import BurgerConstructor from "../components/burger-constructor/burger-constructor";
-import BurgerIngredients from "../components/burger-ingredients/burger-ingredients";
+import BurgerConstructor from "../../components/burger-constructor/burger-constructor";
+import BurgerIngredients from "../../components/burger-ingredients/burger-ingredients";
 
-import Ingredients from "./ingredients";
+import IngredientDetails from "../../components/ingredient-details/ingredient-details";
 
 import styles from "./home.module.css";
 
@@ -18,7 +18,7 @@ export function ConstructorPage() {
   const isActionPop = history.action === "POP";
 
   if (path === "/ingredients/:id" && isActionPop) {
-    return <Ingredients />;
+    return <IngredientDetails />;
   }
 
   return (

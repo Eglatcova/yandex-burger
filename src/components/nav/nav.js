@@ -25,7 +25,7 @@ export function AppHeader() {
             </span>
           </NavLink>
           <NavLink
-            to="/list"
+            to="/feed"
             className={`${navStyles.button} ml-2 pr-5 pl-5`}
             activeClassName={`${navStyles.activeHref}`}
           >

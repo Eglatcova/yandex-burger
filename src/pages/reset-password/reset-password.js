@@ -5,10 +5,10 @@ import {
   Input,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { getCookie } from "../utils/getCookie";
-import { deleteCookie } from "../utils/deleteCookie";
+import { getCookie } from "../../utils/getCookie";
+import { deleteCookie } from "../../utils/deleteCookie";
 
-import { FormWrap } from "../components/form-wrap/form-wrap";
+import { FormWrap } from "../../components/form-wrap/form-wrap";
 
 export function ResetPassword() {
   const forgotCookie = getCookie("updPass");

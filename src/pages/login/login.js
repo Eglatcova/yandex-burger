@@ -6,8 +6,8 @@ import {
   PasswordInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { postAuth } from "../sevices/actions/user.js";
-import { FormWrap } from "../components/form-wrap/form-wrap";
+import { postAuth } from "../../services/actions/user.js";
+import { FormWrap } from "../../components/form-wrap/form-wrap";
 
 export function LoginPage() {
   const history = useHistory();

@@ -1,14 +1,26 @@
 import React from "react";
-import ingredientDetailsStyles from "./ingredient-details.module.css";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+
+import ingredientDetailsStyles from "./ingredient-details.module.css";
 
 export default function IngredientDetails() {
-  const checkedIngredient = useSelector(
-    (store) => store.ingredients.lookedIngredient
-  );
+  const { ingredients, ingredientsLoaded } = useSelector((store) => ({
+    ingredients: store.ingredients.allingredients,
+    ingredientsLoaded: store.ingredients.ingredientsLoaded,
+  }));
+
+  const { id } = useParams();
+
+  if (!ingredientsLoaded) {
+    return null;
+  }
+
+  const ingredient = ingredients?.find((elem) => id === elem._id) || [];
 
   const { image_large, name, calories, proteins, fat, carbohydrates } =
-    checkedIngredient;
+    ingredient;
+
   const txtClasses = "text text_type_main-default text_color_inactive";
   const numsClasse = "text text_type_digits-default text_color_inactive mt-2";
 

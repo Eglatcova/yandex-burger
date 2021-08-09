@@ -2,12 +2,12 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Switch, NavLink, useHistory } from "react-router-dom";
 
-import { postLogout } from "../sevices/actions/user";
+import { postLogout } from "../../services/actions/user";
 
-import { getCookie } from "../utils/getCookie";
+import { getCookie } from "../../utils/getCookie";
 
-import ProfileForm from "../components/profile-form/profile-form";
-import { ProtectedRoute } from "../components/protected-route/protected-route";
+import ProfileForm from "../../components/profile-form/profile-form";
+import { ProtectedRoute } from "../../components/protected-route/protected-route";
 import styles from "./profile.module.css";
 
 export function Profile() {
@@ -15,7 +15,7 @@ export function Profile() {
 
   const dispatch = useDispatch();
 
-  const onClockLogout = () => {
+  const onClickLogout = () => {
     dispatch(postLogout(getCookie("token"))).then(() => {
       history.replace({ pathname: "/login" });
     });
@@ -42,7 +42,7 @@ export function Profile() {
         </NavLink>
         <li
           className={`${styles.item} text text_type_main-medium`}
-          onClick={onClockLogout}
+          onClick={onClickLogout}
         >
           Выход
         </li>

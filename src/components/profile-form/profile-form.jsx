@@ -5,7 +5,7 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-import { patchUserData } from "../../sevices/actions/user";
+import { patchUserData } from "../../services/actions/user";
 
 import style from "./profile-form.module.css";
 

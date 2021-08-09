@@ -45,6 +45,13 @@ export const PATCH_USER_DATA_REQUEST = "PATCH_USER_DATA_REQUEST";
 export const PATCH_USER_DATA_SUCCESS = "PATCH_USER_DATA_SUCCESS";
 export const PATCH_USER_DATA_ERROR = "PATCH_USER_DATA_ERROR";
 
+//urls
+const urlRegister = "https://norma.nomoreparties.space/api/auth/register";
+const urlLogin = "https://norma.nomoreparties.space/api/auth/login";
+const urlToken = "https://norma.nomoreparties.space/api/auth/token";
+const urlLogout = "https://norma.nomoreparties.space/api/auth/logout";
+const urlUser = "https://norma.nomoreparties.space/api/auth/user";
+
 //запрос к апи, регистрация
 export const postRegister =
   (userName, userEmail, userPassword) => async (dispatch) => {
@@ -52,20 +59,17 @@ export const postRegister =
       type: POST_REGISTER_REQUEST,
     });
 
-    let response = await fetch(
-      "https://norma.nomoreparties.space/api/auth/register",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: userEmail,
-          password: userPassword,
-          name: userName,
-        }),
-      }
-    ).catch((e) => {
+    const response = await fetch(urlRegister, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: userEmail,
+        password: userPassword,
+        name: userName,
+      }),
+    }).catch((e) => {
       alert("Register error");
       dispatch({
         type: POST_REGISTER_ERROR,
@@ -73,7 +77,7 @@ export const postRegister =
     });
 
     if (response.ok) {
-      let data = await response.json();
+      const data = await response.json();
       dispatch({
         type: POST_REGISTER_SUCCESS,
         success: data.success,
@@ -99,19 +103,16 @@ export const postAuth = (userEmail, userPassword) => async (dispatch) => {
     type: POST_AUTH_REQUEST,
   });
 
-  let response = await fetch(
-    "https://norma.nomoreparties.space/api/auth/login",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: userEmail,
-        password: userPassword,
-      }),
-    }
-  ).catch((e) => {
+  const response = await fetch(urlLogin, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email: userEmail,
+      password: userPassword,
+    }),
+  }).catch((e) => {
     alert("Login error");
     dispatch({
       type: POST_AUTH_ERROR,
@@ -119,7 +120,7 @@ export const postAuth = (userEmail, userPassword) => async (dispatch) => {
   });
 
   if (response.ok) {
-    let data = await response.json();
+    const data = await response.json();
     dispatch({
       type: POST_AUTH_SUCCESS,
       success: data.success,
@@ -145,18 +146,15 @@ export const postToken = (userToken) => async (dispatch) => {
     type: POST_TOKEN_REQUEST,
   });
 
-  let response = await fetch(
-    "https://norma.nomoreparties.space/api/auth/token",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        token: userToken,
-      }),
-    }
-  ).catch((e) => {
+  const response = await fetch(urlToken, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      token: userToken,
+    }),
+  }).catch((e) => {
     alert("Token error");
     dispatch({
       type: POST_TOKEN_ERROR,
@@ -164,8 +162,7 @@ export const postToken = (userToken) => async (dispatch) => {
   });
 
   if (response.ok) {
-    let data = await response.json();
-    console.log("ok", data);
+    const data = await response.json();
     dispatch({
       type: POST_TOKEN_SUCCESS,
       success: data.success,
@@ -188,18 +185,15 @@ export const postLogout = (userToken) => async (dispatch) => {
     type: POST_LOGOUT_REQUEST,
   });
 
-  let response = await fetch(
-    "https://norma.nomoreparties.space/api/auth/logout",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        token: userToken,
-      }),
-    }
-  ).catch((e) => {
+  const response = await fetch(urlLogout, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      token: userToken,
+    }),
+  }).catch((e) => {
     alert("Logout error");
     dispatch({
       type: POST_LOGOUT_ERROR,
@@ -207,7 +201,7 @@ export const postLogout = (userToken) => async (dispatch) => {
   });
 
   if (response.ok) {
-    let data = await response.json();
+    const data = await response.json();
     dispatch({
       type: POST_LOGOUT_SUCCESS,
     });
@@ -228,17 +222,14 @@ export const getUserData = (accessToken) => async (dispatch) => {
     type: GET_USER_DATA_REQUEST,
   });
 
-  let response = await fetch(
-    "https://norma.nomoreparties.space/api/auth/user",
-    {
-      method: "GET",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + accessToken,
-      },
-    }
-  ).catch((e) => {
+  const response = await fetch(urlUser, {
+    method: "GET",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + accessToken,
+    },
+  }).catch((e) => {
     alert("User get data error");
     dispatch({
       type: GET_USER_DATA_ERROR,
@@ -246,7 +237,7 @@ export const getUserData = (accessToken) => async (dispatch) => {
   });
 
   if (response.ok) {
-    let data = await response.json();
+    const data = await response.json();
     dispatch({
       type: GET_USER_DATA_SUCCESS,
       name: data.user.name,
@@ -266,21 +257,18 @@ export const patchUserData =
     dispatch({
       type: PATCH_USER_DATA_REQUEST,
     });
-    let response = await fetch(
-      "https://norma.nomoreparties.space/api/auth/user",
-      {
-        method: "PATCH",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + accessToken,
-        },
-        body: JSON.stringify({
-          email: userEmail,
-          name: userName,
-        }),
-      }
-    ).catch((e) => {
+    const response = await fetch(urlUser, {
+      method: "PATCH",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + accessToken,
+      },
+      body: JSON.stringify({
+        email: userEmail,
+        name: userName,
+      }),
+    }).catch((e) => {
       alert("User patch data error");
       dispatch({
         type: PATCH_USER_DATA_ERROR,
@@ -288,7 +276,7 @@ export const patchUserData =
     });
 
     if (response.ok) {
-      let data = await response.json();
+      const data = await response.json();
       alert("Ваши данные обновлены");
       dispatch({
         type: PATCH_USER_DATA_SUCCESS,

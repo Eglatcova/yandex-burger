@@ -5,8 +5,8 @@ import {
   Input,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { setCookie } from "../utils/setCookie";
-import { FormWrap } from "../components/form-wrap/form-wrap";
+import { setCookie } from "../../utils/setCookie";
+import { FormWrap } from "../../components/form-wrap/form-wrap";
 
 export function ForgotPassword() {
   const { auth } = useSelector((store) => ({

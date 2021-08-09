@@ -7,8 +7,8 @@ import {
   PasswordInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { postRegister } from "../sevices/actions/user.js";
-import { FormWrap } from "../components/form-wrap/form-wrap";
+import { postRegister } from "../../services/actions/user.js";
+import { FormWrap } from "../../components/form-wrap/form-wrap";
 
 export function RegisterPage() {
   const { auth } = useSelector((store) => ({

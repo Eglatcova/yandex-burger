@@ -11,7 +11,7 @@ import ingredientsStyles from "./burger-ingredients.module.css";
 import {
   LOOKED_INGREDIENT,
   ADD_GLOW_INGREDIENTS_TAB,
-} from "../../sevices/actions/ingredients";
+} from "../../services/actions/ingredients";
 
 export default function BurgerIngredients() {
   const history = useHistory();

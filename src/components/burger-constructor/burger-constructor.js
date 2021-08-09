@@ -6,8 +6,8 @@ import {
   ADD_INGREDIENT,
   MOVING_INGREDIENT,
   DELETE_CONSTRUCTOR_INGREDIENTS,
-} from "../../sevices/actions/ingredients";
-import { getAllOrder } from "../../sevices/actions/order";
+} from "../../services/actions/ingredients";
+import { getAllOrder } from "../../services/actions/order";
 import { useDrop } from "react-dnd";
 
 import {

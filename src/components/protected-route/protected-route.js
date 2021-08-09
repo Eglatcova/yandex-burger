@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 
 import { getCookie } from "../../utils/getCookie";
-import { postToken } from "../../sevices/actions/user";
+import { postToken } from "../../services/actions/user";
 
 export function ProtectedRoute({ children, path, exact }) {
   const history = useHistory();

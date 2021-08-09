@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import { getCookie } from "./utils/getCookie";
-import { getAllIngredients } from "./sevices/actions/ingredients";
-import { postToken, getUserData } from "./sevices/actions/user";
+import { getAllIngredients } from "./services/actions/ingredients";
+import { postToken, getUserData } from "./services/actions/user";
 
 import { AppHeader } from "./components/nav/nav";
 
