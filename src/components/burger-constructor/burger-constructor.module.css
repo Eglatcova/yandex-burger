@@ -1,0 +1,29 @@
+.mainBox {
+  max-height: 100%;
+}
+
+.elements {
+  display: grid;
+}
+
+.element {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.element div:nth-child(2) {
+  width: 100%;
+}
+.scrollBox {
+  min-height: 160px;
+  max-height: 65%;
+  flex-direction: column;
+  width: 100%;
+  display: flex;
+}
+
+.total {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}

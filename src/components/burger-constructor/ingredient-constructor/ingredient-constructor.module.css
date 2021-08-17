@@ -1,0 +1,16 @@
+.element {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 8px 0;
+}
+.element div:nth-child(2) {
+  width: 100%;
+}
+
+.element:first-child {
+  padding: 0 0 8px 0;
+}
+.element:last-child {
+  padding: 8px 0 0 0;
+}
